@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Field, reduxForm, reset} from 'redux-form';
+import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {createContact} from '../actions';
 import "../css/Contact.css";
@@ -12,7 +12,7 @@ import pict5 from "../image/group-5067.svg"
 import pict6 from "../image/red-cartoon-4.svg"
 import pict7 from "../image/red-cartoon-6.svg"
 import { Container, Image} from "react-bootstrap";
-
+import swal from "sweetalert";
 
 class ContactUs extends Component {
     renderError({error, touched}) {
@@ -58,14 +58,15 @@ class ContactUs extends Component {
         const { createContact,reset, } = this.props;
         console.log("нажато")
         console.log(formValues)
-       createContact(formValues).then(() => {
-           reset();})
+        createContact(formValues).then(() => {
+            swal("Your message save!",)
+            reset();})
 
 
     }
 
     render() {
-        const { handleSubmit, reset } = this.props;
+        const { handleSubmit } = this.props;
         return (
             <Container className="contact-container">
                 <Image className="cloud0" alt="" src={pict0}/>
@@ -83,7 +84,7 @@ class ContactUs extends Component {
 
 
                     {/* <form onSubmit={this.props.handleSubmit(this.onSubmit)}>*/}
-                        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+                    <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 
                         <Field
                             name="name"
@@ -98,7 +99,7 @@ class ContactUs extends Component {
                         />
 
                         <Field
-                            name="message"
+                            name="messsage"
                             type="textarea"
                             component={this.renderInput2}
                         />
@@ -138,7 +139,7 @@ const validate = formValues => {
     if (!formValues.email) {
         errors.email = "Please enter your email";
     } else
-        if (formValues.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(formValues.email)) {
+    if (formValues.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(formValues.email)) {
 
         errors.email = 'Invalid email address'
     }
