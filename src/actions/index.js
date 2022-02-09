@@ -6,6 +6,6 @@ export const createContact = formValues => async dispatch => {
 
     //Add Contact to Redux Store
     dispatch({type: 'ADD_CONTACT', payload:response.data});
-
+    dispatch(reset('contactUs')); 
 
 }
